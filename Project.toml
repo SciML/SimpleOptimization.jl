@@ -20,6 +20,7 @@ SimpleOptimizationForwardDiffExt = "ForwardDiff"
 [compat]
 ADTypes = "0.2"
 SciMLBase = "2"
+SimpleNonlinearSolve = "1"
 
 [extras]
 CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
