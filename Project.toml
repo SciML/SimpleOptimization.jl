@@ -18,6 +18,7 @@ SimpleOptimizationEnzymeExt = "Enzyme"
 SimpleOptimizationForwardDiffExt = "ForwardDiff"
 
 [compat]
+ADTypes = "0.2"
 SciMLBase = "2"
 
 [extras]
