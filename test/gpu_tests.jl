@@ -1,12 +1,20 @@
-using StaticArrays, CUDA
+using StaticArrays, CUDA, ForwardDiff, Enzyme
+import Base.Iterators: product
 
 CUDA.allowscalar(false)
 
-N = 2
-
-function rosenbrock(x, p)
-    sum(p[2] * (x[i + 1] - x[i]^2)^2 + (p[1] - x[i])^2 for i in 1:(length(x) - 1))
+function objf(x, p)
+    return x[1]^2 + x[2]^2
 end
+
+x0 = @SArray ones(Float32, 2)
+
+optf = OptimizationFunction(rosenbrock, Optimization.AutoForwardDiff())
+fd_prob = OptimizationProblem(optf, x0, p)
+
+optf = OptimizationFunction(rosenbrock, Optimization.AutoEnzyme())
+enzyme_prob = OptimizationProblem(optf, x0, p)
+
 x0 = @SArray zeros(Float32, N)
 p = @SArray Float32[1.0, 100.0]
 optf = OptimizationFunction(rosenbrock, Optimization.AutoEnzyme())
@@ -17,7 +25,8 @@ function kernel_function(prob, alg)
     return nothing
 end
 
-@testset "$(nameof(typeof(alg)))" for alg in (SimpleBFGS(), SimpleLBFGS())
+@testset "$(nameof(typeof(alg)))" for (alg, prob) in product((SimpleBFGS(), SimpleLBFGS()),
+    (fd_prob, enzyme_prob))
     @test begin
         try
             @cuda kernel_function(prob, alg)
