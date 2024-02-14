@@ -17,13 +17,16 @@ ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 SimpleOptimizationEnzymeExt = "Enzyme"
 SimpleOptimizationForwardDiffExt = "ForwardDiff"
 
+[compat]
+DiffEqBase = "6"
+
 [extras]
 CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
 Enzyme = "7da242da-08ed-463a-9acd-ee780be4f1d9"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 Optimization = "7f7a1694-90dd-40f0-9382-eb1efda571ba"
-Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
 test = ["Test", "CUDA", "Enzyme", "ForwardDiff", "Optimization", "StaticArrays"]
