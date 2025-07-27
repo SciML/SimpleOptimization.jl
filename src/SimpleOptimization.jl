@@ -22,10 +22,6 @@ end
 include("./algorithms.jl")
 include("./solve.jl")
 
-if !isdefined(Base, :get_extension)
-    using Requires
-end
-
 export SimpleBFGS, SimpleLBFGS
 
 end
