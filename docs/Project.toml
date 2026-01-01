@@ -1,0 +1,5 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
+Optimization = "7f7a1694-90dd-40f0-9382-eb1efda571ba"
+SimpleOptimization = "657a9c50-d081-4d89-9a7d-f68e0455ea98"
