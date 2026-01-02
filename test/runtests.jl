@@ -7,3 +7,7 @@ end
 if GROUP == "GPU"
     include("./gpu_tests.jl")
 end
+
+if GROUP == "JET" || GROUP == "All"
+    include("./jet_tests.jl")
+end

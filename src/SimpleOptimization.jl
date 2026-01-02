@@ -1,7 +1,6 @@
 module SimpleOptimization
 
 import SciMLBase
-import DiffEqBase: AbsSafeBestTerminationMode
 import SciMLBase: _unwrap_val
 using SimpleNonlinearSolve
 using ADTypes
@@ -13,8 +12,11 @@ function instantiate_gradient(f, adtype::ADTypes.AbstractADType)
     strtind = isnothing(_strtind) ? 5 : _strtind + 5
     open_nrmlbrkt_ind = findfirst('(', adtypestr)
     open_squigllybrkt_ind = findfirst('{', adtypestr)
-    open_brkt_ind = isnothing(open_squigllybrkt_ind) ? open_nrmlbrkt_ind :
-                    min(open_nrmlbrkt_ind, open_squigllybrkt_ind)
+    # Handle cases where one or both indices are nothing
+    # Use something to convert Nothing to a fallback value for type stability
+    nrml = something(open_nrmlbrkt_ind, length(adtypestr) + 1)
+    squiggly = something(open_squigllybrkt_ind, length(adtypestr) + 1)
+    open_brkt_ind = min(nrml, squiggly)
     adpkg = adtypestr[strtind:(open_brkt_ind - 1)]
     throw(ArgumentError("The passed automatic differentiation backend choice is not available. Please load the corresponding AD package $adpkg."))
 end
