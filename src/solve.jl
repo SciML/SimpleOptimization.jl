@@ -32,7 +32,7 @@ function SciMLBase.solve(prob::SciMLBase.OptimizationProblem,
         args...;
         abstol = nothing,
         reltol = nothing,
-        termination_condition = AbsSafeBestTerminationMode(),
+        termination_condition = nothing,
         maxiters = 100,
         kwargs...)
     f = Base.Fix2(prob.f.f, prob.p)
