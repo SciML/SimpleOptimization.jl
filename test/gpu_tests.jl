@@ -28,8 +28,10 @@ function kernel_function(prob, alg)
     return nothing
 end
 
-@testset "$(nameof(typeof(alg)))" for (alg, prob) in product((SimpleBFGS(), SimpleLBFGS()),
-    (fd_prob, enzyme_prob))
+@testset "$(nameof(typeof(alg)))" for (alg, prob) in product(
+        (SimpleBFGS(), SimpleLBFGS()),
+        (fd_prob, enzyme_prob)
+    )
     @test begin
         try
             @cuda kernel_function(prob, alg)

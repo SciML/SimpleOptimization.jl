@@ -7,7 +7,7 @@ using ForwardDiff
 
 #inlining helps GPU compilation
 @inline function SimpleOptimization.instantiate_gradient(f, ::AutoForwardDiff)
-    (θ, p) -> ForwardDiff.gradient(f, θ)
+    return (θ, p) -> ForwardDiff.gradient(f, θ)
 end
 
 end
