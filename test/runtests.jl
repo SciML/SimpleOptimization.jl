@@ -11,3 +11,8 @@ end
 if GROUP == "JET" || GROUP == "All"
     include("./jet_tests.jl")
 end
+
+# Allocation tests run in nopre group (not during precompilation)
+if GROUP == "nopre" || GROUP == "All"
+    include("./alloc_tests.jl")
+end
