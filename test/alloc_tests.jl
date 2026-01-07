@@ -73,8 +73,8 @@ end
         # Also test that solutions are correct
         sol_lbfgs = solve(prob, SimpleLBFGS())
         sol_bfgs = solve(prob, SimpleBFGS())
-        @test sol_lbfgs.objective < 1e-6
-        @test sol_bfgs.objective < 1e-6
+        @test sol_lbfgs.objective < 1.0e-6
+        @test sol_bfgs.objective < 1.0e-6
     end
 
     @testset "Timing benchmark - Static Arrays" begin
